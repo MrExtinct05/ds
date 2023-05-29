@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+
+# Downloading dataset from https://www.kaggle.com/c/titanic/data
+df = pd.read_csv('/content/gender_submission.csv')
+df.head()
+
+missing_values = df.isnull().sum()
+print(missing_values)
+
+summary_stats = df.describe()
+print(summary_stats)
+
+column_names = df.columns
+data_types = df.dtypes
+print("Column Names:")
+print(column_names)
+print("Data Types:")
+print(data_types)
+
+dimensions = df.shape
+print("rows, colomns")
+print(dimensions)
+
+variable_types = df.dtypes.value_counts()
+print(variable_types)
+
+df['PassengerId'] = df['PassengerId'].astype('category')
+df['PassengerId']
+
+df_encoded = pd.get_dummies(df)
+df_encoded

@@ -1,0 +1,55 @@
+# dataset from https://www.kaggle.com/code/bhattacharjeeajay12/insuarance/input
+
+import pandas as pd
+
+# Read the dataset
+data = pd.read_csv('/content/insurance.csv')
+data.head()
+
+# Calculate summary statistics grouped by a categorical variable
+categorical_variable = 'age'  # Replace with your actual column name
+numeric_variable = 'charges'  # Replace with your actual column name
+
+summary_stats = data.groupby(categorical_variable)[numeric_variable].describe()
+
+# Extract the desired statistics for each category
+desired_statistics = ['mean', 'median', 'min', 'max', 'std']
+
+# Create a list of numeric values for each response to the categorical variable
+category_values = summary_stats.index.tolist()
+
+# Print the summary statistics
+print(summary_stats)
+print("Category values:", category_values)
+
+
+2)
+
+# Download dataset from https://www.kaggle.com/datasets/uciml/iris
+
+# !pip install pandas numpy
+import pandas as pd
+import numpy as np
+
+# Load the dataset
+df = pd.read_csv('/content/Iris.csv')
+df.head()
+
+# Filter dataset for 'Iris-setosa', 'Iris-versicolor', and 'Iris-virginica'
+setosa_df = df[df['Species'] == 'Iris-setosa']
+versicolor_df = df[df['Species'] == 'Iris-versicolor']
+virginica_df = df[df['Species'] == 'Iris-virginica']
+
+# Calculate statistical details for each species
+setosa_stats = setosa_df.describe()
+versicolor_stats = versicolor_df.describe()
+virginica_stats = virginica_df.describe()
+
+print("Statistical details for 'Iris-setosa':")
+print(setosa_stats)
+
+print("\nStatistical details for 'Iris-versicolor':")
+print(versicolor_stats)
+
+print("\nStatistical details for 'Iris-virginica':")
+print(virginica_stats)

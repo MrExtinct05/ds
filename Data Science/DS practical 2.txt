@@ -1,0 +1,59 @@
+import pandas as pd
+import numpy as np
+
+# Create sample dataset
+data = {
+    'Student ID': [1, 2, 3, 4, 5],
+    'Age': [18, 20, np.nan, 19, 22],
+    'Gender': ['Male', 'Female', 'Female', 'Male', 'Male'],
+    'Exam Score': [90, 85, 75, 95, 65],
+    'Study Hours': [4, 6, 8, np.nan, 5],
+    'Attendance Percentage': [80, 95, 85, 70, 60]
+}
+
+df = pd.DataFrame(data)
+df
+
+# Check for missing values
+print(df.isnull().sum())
+
+# Output:
+# Student ID                0
+# Age                       1
+# Gender                    0
+# Exam Score                0
+# Study Hours               1
+# Attendance Percentage     0
+# dtype: int64
+
+# Inpute missing values with mean
+df['Age'].fillna(df['Age'].mean(), inplace=True)
+df['Study Hours'].fillna(df['Study Hours'].mean(), inplace=True)
+
+# Check for inconsistencies
+# no of time a value is given in dataset
+print(df['Age'].value_counts())
+
+# Detect outliers using IQR method
+# Handle outliers by replacing with maximum and minimum values
+lower_bound = 65
+upper_bound = 95
+df['Exam Score'] = np.where(df['Exam Score'] < lower_bound, lower_bound, df['Exam Score'])
+df['Exam Score'] = np.where(df['Exam Score'] > upper_bound, upper_bound, df['Exam Score'])
+df['Exam Score']
+
+
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Check the distribution of 'Attendance Percentage' variable
+sns.histplot(df['Attendance Percentage'], kde=True)
+plt.show()
+
+# Apply square root transformation
+df['Attendance Percentage'] = np.sqrt(df['Attendance Percentage'])
+
+# Check the transformed distribution
+sns.histplot(df['Attendance Percentage'], kde=True)
+plt.show()

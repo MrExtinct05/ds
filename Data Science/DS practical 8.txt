@@ -1,0 +1,42 @@
+import pandas as pd
+import seaborn as sns
+
+# Load the Titanic dataset
+df = sns.load_dataset('titanic')
+
+# Display the first few rows of the dataset
+print(df.head())
+
+# Countplot:
+sns.countplot(x='survived', data=df)
+
+# Barplot:
+sns.barplot(x='sex', y='survived', hue='class', data=df)
+
+# Convert categorical variables using one-hot encoding
+df_encoded = pd.get_dummies(df_numeric)
+
+# Create correlation matrix and heatmap
+sns.heatmap(df_encoded.corr(), annot=True, cmap='coolwarm')
+
+
+
+2)
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the Titanic dataset
+df = sns.load_dataset('titanic')
+
+# Plot histogram of ticket prices
+sns.histplot(data=df, x='fare', kde=True)
+
+# Set plot title and labels
+plt.title('Distribution of Ticket Prices')
+plt.xlabel('Ticket Fare')
+plt.ylabel('Count')
+
+# Display the plot
+plt.show()
+
